@@ -1,0 +1,42 @@
+local flying = true -- Já começa voando
+local speeds = 50
+local player = game.Players.LocalPlayer
+local humanoid = player.Character:WaitForChild("Humanoid")
+local rootPart = player.Character:WaitForChild("HumanoidRootPart")
+
+-- Função para iniciar o voo
+local function startFly()
+    local bodyGyro = Instance.new("BodyGyro", rootPart)
+    bodyGyro.P = 9e4
+    bodyGyro.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+    bodyGyro.cframe = rootPart.CFrame
+
+    local bodyVelocity = Instance.new("BodyVelocity", rootPart)
+    bodyVelocity.velocity = Vector3.new(0, 0, 0)
+    bodyVelocity.maxForce = Vector3.new(9e9, 9e9, 9e9)
+
+    humanoid.PlatformStand = true
+
+    -- Loop para controlar o voo
+    while flying do
+        game:GetService("RunService").RenderStepped:Wait()
+
+        bodyGyro.cframe = workspace.CurrentCamera.CFrame
+        bodyVelocity.velocity = workspace.CurrentCamera.CFrame.lookVector * speeds
+
+        -- Controle de altura
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) then
+            bodyVelocity.velocity = bodyVelocity.velocity + Vector3.new(0, speeds, 0)
+        elseif game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftShift) then
+            bodyVelocity.velocity = bodyVelocity.velocity + Vector3.new(0, -speeds, 0)
+        end
+    end
+
+    -- Desativar voo
+    humanoid.PlatformStand = false
+    bodyGyro:Destroy()
+    bodyVelocity:Destroy()
+end
+
+-- Iniciar voo automaticamente
+startFly()
