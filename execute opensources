@@ -1,0 +1,23 @@
+-- Função para carregar e executar scripts a partir de uma URL
+function loadScriptFromURL(url)
+    local success, result = pcall(function()
+        return game:HttpGet(url, true)
+    end)
+    
+    if success then
+        local scriptFunction = loadstring(result)
+        if scriptFunction then
+            pcall(scriptFunction)
+        end
+    else
+        warn("Falha ao carregar o script de: " .. url)
+    end
+end
+
+-- URLs dos scripts
+local scriptURL1 = "https://raw.githubusercontent.com/CLEITI6966/HUB/refs/heads/main/Opensource-1"
+local scriptURL2 = "https://raw.githubusercontent.com/CLEITI6966/HUB/refs/heads/main/Opensource-2"
+
+-- Carregar e executar os dois scripts
+loadScriptFromURL(scriptURL1)
+loadScriptFromURL(scriptURL2)
