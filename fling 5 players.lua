@@ -138,7 +138,7 @@ local function SkidFling(TargetPlayer)
     end
 
     local function SFBasePart(BasePart)
-        local TimeToWait = 99999999
+        local TimeToWait = 2
         local Time = tick()
         local Angle = 0
 
@@ -153,7 +153,7 @@ local function SkidFling(TargetPlayer)
 
             if RootPart and THumanoid then
                 if BasePart and BasePart:IsA("BasePart") and BasePart.Velocity.Magnitude < 90 then
-                    Angle = Angle + 100
+                    Angle = Angle + 20
                     FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
                     task.wait()
                     FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
@@ -169,7 +169,7 @@ local function SkidFling(TargetPlayer)
             else
                 break
             end
-        until BasePart.Velocity.Magnitude > 90 or not BasePart.Parent or not TargetPlayer.Character or Humanoid.Health <= 0 or tick() > Time + TimeToWait
+        until BasePart.Velocity.Magnitude > 40 or not BasePart.Parent or not TargetPlayer.Character or Humanoid.Health <= 0 or tick() > Time + TimeToWait
     end
 
     if TRootPart and THead then
