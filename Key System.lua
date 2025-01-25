@@ -9,7 +9,7 @@ local Window = OrionLib:MakeWindow({
 	IntroText = "Verificando Chave..."
 })
 
-getgenv().Key = "CLEITI6966 E3XU6KQJ0LBFFB5 O PIOR"
+getgenv().Key = "CLEITI6966 2CLT4J5ML1ZA7VU O PIOR"
 getgenv().KeyInput = "" -- Variável para a chave inserida
 
 local Tab = Window:MakeTab({
